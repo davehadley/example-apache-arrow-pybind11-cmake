@@ -21,6 +21,20 @@ jobs:
     - name: debug
       run: pwd && ls && env
     - name: build
+      shell: bash -l {0}
       run: pip install .
     - name: pytest
+      shell: bash -l {0}
       run: pytest tests
+
+  lint:
+    name: Lints
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup python
+      uses: actions/setup-python@v2
+    - name: Run pre-commit hooks
+      run: |-
+        pip install pre-commit \
+        && pre-commit run --all
