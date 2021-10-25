@@ -17,6 +17,8 @@ jobs:
       with:
         auto-activate-base: true
         activate-environment: example-apache-arrow-pybind11-cmake
+    - name: debug
+      run: pwd && ls && env
     - name: build
       run: pip install .
     - name: pytest
