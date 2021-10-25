@@ -1,0 +1,23 @@
+name: ci
+
+on: 
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+    
+    steps:
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-activate-base: true
+        activate-environment: example-apache-arrow-pybind11-cmake
+    - name: build
+      run: pip install .
+    - name: pytest
+      run: pytest tests
