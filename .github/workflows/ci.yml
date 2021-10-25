@@ -17,7 +17,7 @@ jobs:
     - uses: conda-incubator/setup-miniconda@v2
       with:
         auto-activate-base: true
-        activate-environment: example-apache-arrow-pybind11-cmake
+        environment-file: environment.yml
     - name: debug
       run: pwd && ls && env
     - name: build
