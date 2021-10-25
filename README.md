@@ -2,10 +2,8 @@
 
 An example package that demonstrates:
     - C++ extensions to Apache Arrow built with CMake
-    - python bindings to those exensions with pybind11.
+    - python bindings to those extensions with pybind11.
     - dependencies installed with conda
-
-Similar to <https://github.com/vaexio/vaex-arrow-ext>, however in this example the C++ component builds with CMake.
 
 ## Usage
 
@@ -37,4 +35,4 @@ Licensed under either of
 
 at your option.
 
-This example uses the `setup.py` from the [pybind11 CMake example](https://github.com/pybind/cmake_example) that is licensed under a [BSD-style license](https://github.com/pybind/cmake_example/blob/master/LICENSE).
+This example uses a modified version of the `setup.py` from the [pybind11 CMake example](https://github.com/pybind/cmake_example) that is licensed under a [BSD-style license](https://github.com/pybind/cmake_example/blob/master/LICENSE).
