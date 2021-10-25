@@ -2,7 +2,7 @@ name: ci
 
 on:
   push:
-    branches: [main, "*"]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -18,17 +18,18 @@ jobs:
       with:
         auto-activate-base: true
         environment-file: environment.yml
-    - name: debug
+    - name: Print Environment
+      shell: bash -l {0}
       run: pwd && ls && env
-    - name: build
+    - name: Build
       shell: bash -l {0}
       run: pip install .
-    - name: pytest
+    - name: Test
       shell: bash -l {0}
       run: pytest tests
 
   lint:
-    name: Lints
+    name: Lint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
