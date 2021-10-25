@@ -1,6 +1,6 @@
 name: ci
 
-on: 
+on:
   push:
     branches: [main]
   pull_request:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
-    
+
     steps:
     - uses: conda-incubator/setup-miniconda@v2
       with:

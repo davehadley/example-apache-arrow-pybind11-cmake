@@ -1,12 +1,16 @@
 import tempfile
 from pathlib import Path
 
+
 def test_package_can_be_imported():
     import arrow_pybind_example
+
     assert arrow_pybind_example.example_load_csv
+
 
 def test_load_csv_works():
     import arrow_pybind_example
+
     with tempfile.TemporaryDirectory() as directory:
         filepath = Path(directory) / "example.csv"
         with open(filepath, "wt") as tmp:
