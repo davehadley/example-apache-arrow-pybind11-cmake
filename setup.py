@@ -164,7 +164,7 @@ setup(
     name="arrow_pybind_example",
     version="0.1.0",
     description="arrow_pybind_example",
-    long_description="An example package demonstrating python bindings of C++ extensions to Apache Arrow  CMake",
+    long_description="An example package demonstrating python bindings of C++ extensions to Apache Arrow built with CMake",
     ext_modules=[CMakeExtension("arrow_pybind_example")],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
