@@ -1,9 +1,10 @@
-# Apache Arrow C++ Exensions with Python Bindings built with CMake
+# Apache Arrow / CMake / pybind11 Example
 
 An example package that demonstrates:
-    - C++ extensions to Apache Arrow built with CMake
-    - python bindings to those extensions with pybind11.
-    - dependencies installed with conda
+    
+- C++ extensions to Apache Arrow built with CMake
+- python bindings to those extensions with pybind11.
+- dependencies installed with conda
 
 ## Usage
 
