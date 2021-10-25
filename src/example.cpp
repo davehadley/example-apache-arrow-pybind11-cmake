@@ -13,6 +13,7 @@
 #include <string>
 
 using arrow::Status;
+namespace py = pybind11;
 
 namespace {
 
@@ -30,50 +31,17 @@ std::shared_ptr<arrow::Table> loadCsvFileToArrowTable(
   return std::move(table);
 }
 
-PyObject* pythonLoadCsvFileToArrowTable(std::string csv_filename) {
+py::object example_load_csv(std::string csv_filename) {
   arrow::py::import_pyarrow();
-  return arrow::py::wrap_table(loadCsvFileToArrowTable(csv_filename));
-}
-
-Status RunMain(int argc, char** argv) {
-  std::string csv_filename = "test.csv";
-  std::string arrow_filename = "test.arrow";
-
-  std::cerr << "* Reading CSV file '" << csv_filename << "' into table"
-            << std::endl;
-
-  auto table = loadCsvFileToArrowTable(csv_filename);
-
-  std::cerr << "* Read table:" << std::endl;
-  ARROW_RETURN_NOT_OK(arrow::PrettyPrint(*table, {}, &std::cerr));
-
-  std::cerr << "* Writing table into Arrow IPC file '" << arrow_filename.c_str()
-            << "'" << std::endl;
-  ARROW_ASSIGN_OR_RAISE(auto output_file, arrow::io::FileOutputStream::Open(
-                                              arrow_filename.c_str()));
-  ARROW_ASSIGN_OR_RAISE(auto batch_writer, arrow::ipc::MakeFileWriter(
-                                               output_file, table->schema()));
-  ARROW_RETURN_NOT_OK(batch_writer->WriteTable(*table));
-  ARROW_RETURN_NOT_OK(batch_writer->Close());
-
-  return Status::OK();
+  PyObject* object =
+      arrow::py::wrap_table(loadCsvFileToArrowTable(csv_filename));
+  return py::reinterpret_steal<py::object>(object);
 }
 
 }  // namespace
 
-int main(int argc, char** argv) {
-  Status st = RunMain(argc, argv);
-  if (!st.ok()) {
-    std::cerr << st << std::endl;
-    return 1;
-  }
-  return 0;
-}
-
-namespace py = pybind11;
-
 PYBIND11_MODULE(arrow_pybind_example, m) {
-  m.def("example_load_csv", &pythonLoadCsvFileToArrowTable,
+  m.def("example_load_csv", &example_load_csv,
         R"pbdoc(
         Loads a CSV file.
     )pbdoc");
